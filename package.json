@@ -1,6 +1,6 @@
 {
-  "name": "sleet-account",
-  "description": "near account creation playground",
+  "name": "colorsanke",
+  "description": "the one stop shop for color built on near",
   "private": true,
   "version": "1.0.0",
   "type": "module",
