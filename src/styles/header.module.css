@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   background-color: var(--primary-color);
   color: var(--text-color);
   position: fixed;
@@ -47,8 +47,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 0.5rem;
 }
 
 .title {
@@ -58,6 +60,8 @@
   text-transform: uppercase;
   font-family: 'junegull', sans-serif;
   mix-blend-mode: difference;
+  text-shadow: -0.5px -0.5px 0 #808080, 0.5px -0.5px 0 #808080, -0.5px 0.5px 0 #808080, 0.5px 0.5px 0 #808080;
+  letter-spacing: 0.1em;
 }
 
 .logo {
