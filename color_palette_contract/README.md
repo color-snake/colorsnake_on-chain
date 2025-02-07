@@ -1,5 +1,7 @@
 # Color Palette Contract
 
+> i updated the contract during testing phase, didn't feel like updateing and coping all the dcoumentaion over. see [color snake palette depoyment.md](color_snake_palette_depoyment.md)
+
 A smart contract written in Zig that enables users to store and manage color palettes on the NEAR blockchain. Users can add their own color palettes, while only the contract owner has the ability to remove palettes.
 
 ## Features

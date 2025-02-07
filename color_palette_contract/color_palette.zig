@@ -20,6 +20,8 @@ const SCRATCH_REGISTER = 0xffffffff;
 const OWNER_KEY = "owner";
 const PALETTES_PREFIX = "palette:";
 const PALETTE_COUNT_KEY = "palette_count";
+const LIKES_PREFIX = "likes:";
+const USER_LIKES_PREFIX = "user_likes:";
 
 // Helper wrapper functions for interacting with the host
 fn log(str: []const u8) void {
@@ -233,4 +235,94 @@ export fn get_palette_by_id() void {
     }
 
     valueReturn("null");
+}
+
+export fn like_palette() void {
+    const input_str = readInputAlloc();
+    const like_input = std.json.parseFromSlice(struct {
+        palette_id: []const u8,
+    }, allocator, input_str, .{}) catch panic("Invalid JSON input");
+    defer like_input.deinit();
+
+    const palette_key = std.fmt.allocPrint(allocator, "{s}{s}", .{ PALETTES_PREFIX, like_input.value.palette_id }) catch panic("Failed to create palette key");
+    defer allocator.free(palette_key);
+
+    if (!storageHasKey(palette_key)) {
+        panic("Palette not found");
+    }
+
+    const user_id = readSignerAccountId();
+    const user_like_key = std.fmt.allocPrint(allocator, "{s}{s}:{s}", .{ USER_LIKES_PREFIX, user_id, like_input.value.palette_id }) catch panic("Failed to create user like key");
+    defer allocator.free(user_like_key);
+
+    if (storageHasKey(user_like_key)) {
+        panic("User has already liked this palette");
+    }
+
+    const likes_key = std.fmt.allocPrint(allocator, "{s}{s}", .{ LIKES_PREFIX, like_input.value.palette_id }) catch panic("Failed to create likes key");
+    defer allocator.free(likes_key);
+
+    const current_likes_str = storageRead(likes_key) orelse "0";
+    const current_likes = std.fmt.parseInt(u32, current_likes_str, 10) catch 0;
+    const new_likes = current_likes + 1;
+
+    var likes_buf: [32]u8 = undefined;
+    const new_likes_str = std.fmt.bufPrint(&likes_buf, "{d}", .{new_likes}) catch panic("Failed to convert likes count");
+
+    _ = storageWrite(likes_key, new_likes_str);
+    _ = storageWrite(user_like_key, "1");
+
+    log("Palette liked successfully");
+}
+
+export fn unlike_palette() void {
+    const input_str = readInputAlloc();
+    const unlike_input = std.json.parseFromSlice(struct {
+        palette_id: []const u8,
+    }, allocator, input_str, .{}) catch panic("Invalid JSON input");
+    defer unlike_input.deinit();
+
+    const palette_key = std.fmt.allocPrint(allocator, "{s}{s}", .{ PALETTES_PREFIX, unlike_input.value.palette_id }) catch panic("Failed to create palette key");
+    defer allocator.free(palette_key);
+
+    if (!storageHasKey(palette_key)) {
+        panic("Palette not found");
+    }
+
+    const user_id = readSignerAccountId();
+    const user_like_key = std.fmt.allocPrint(allocator, "{s}{s}:{s}", .{ USER_LIKES_PREFIX, user_id, unlike_input.value.palette_id }) catch panic("Failed to create user like key");
+    defer allocator.free(user_like_key);
+
+    if (!storageHasKey(user_like_key)) {
+        panic("User has not liked this palette");
+    }
+
+    const likes_key = std.fmt.allocPrint(allocator, "{s}{s}", .{ LIKES_PREFIX, unlike_input.value.palette_id }) catch panic("Failed to create likes key");
+    defer allocator.free(likes_key);
+
+    const current_likes_str = storageRead(likes_key) orelse "0";
+    const current_likes = std.fmt.parseInt(u32, current_likes_str, 10) catch 0;
+    const new_likes = if (current_likes > 0) current_likes - 1 else 0;
+
+    var likes_buf: [32]u8 = undefined;
+    const new_likes_str = std.fmt.bufPrint(&likes_buf, "{d}", .{new_likes}) catch panic("Failed to convert likes count");
+
+    _ = storageWrite(likes_key, new_likes_str);
+    _ = storageWrite(user_like_key, ""); // Remove the user's like
+
+    log("Palette unliked successfully");
+}
+
+export fn get_likes() void {
+    const input_str = readInputAlloc();
+    const likes_input = std.json.parseFromSlice(struct {
+        palette_id: []const u8,
+    }, allocator, input_str, .{}) catch panic("Invalid JSON input");
+    defer likes_input.deinit();
+
+    const likes_key = std.fmt.allocPrint(allocator, "{s}{s}", .{ LIKES_PREFIX, likes_input.value.palette_id }) catch panic("Failed to create likes key");
+    defer allocator.free(likes_key);
+
+    const likes_str = storageRead(likes_key) orelse "0";
+    valueReturn(likes_str);
 }
