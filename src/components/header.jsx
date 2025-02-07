@@ -1,24 +1,23 @@
 import PropTypes from 'prop-types';
 import styles from '@/styles/header.module.css';
+import { Link } from 'react-router-dom';
 
 export const Header = ({ onMenuToggle, isNavVisible }) => {
-  const handleMenuClick = () => {
-    onMenuToggle(!isNavVisible);
-  };
-
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
-        <h1 className={styles.title}>colorsnake</h1>
-        <button
-          className={`${styles.menuButton} ${isNavVisible ? styles.open : ''}`}
-          onClick={handleMenuClick}
-          aria-label="Toggle navigation menu"
-        >
-          <div className={styles.menuLine} />
-          <div className={styles.menuLine} />
-          <div className={styles.menuLine} />
-        </button>
+        <Link to="/" className={styles.title}>COLORSNAKE</Link>
+        <div className={styles.nav}>
+          <button
+            className={`${styles.menuButton} ${isNavVisible ? styles.open : ''}`}
+            onClick={() => onMenuToggle(!isNavVisible)}
+            aria-label="Toggle navigation menu"
+          >
+            <div className={styles.menuLine}></div>
+            <div className={styles.menuLine}></div>
+            <div className={styles.menuLine}></div>
+          </button>
+        </div>
       </div>
     </header>
   );

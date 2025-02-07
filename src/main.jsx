@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import './styles/globals.css';
 import App from './App.jsx';
-import './utils/theme.js';
 
 
 createRoot(document.getElementById('root')).render(
