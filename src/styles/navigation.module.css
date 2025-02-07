@@ -25,13 +25,26 @@
 .navContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 2rem;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 800px;
+  margin: 4rem auto 0;
+  padding: 2rem 4rem;
+  position: relative;
+}
+
+.navContent::before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background-color: var(--accent-color);
+  border-radius: 2px;
 }
 
 .toggleContainer {
