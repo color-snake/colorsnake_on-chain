@@ -1,12 +1,42 @@
 .pageContainer {
-  padding: 2rem;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: calc(100vh - 200px);
+  padding: 2rem;
 }
 
 .content {
   margin-top: 2rem;
+}
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.palettePlaceholder {
+  background-color: var(--primary-color);
+  color: var(--light-accent);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 1rem;
+  }
+  
+  .paletteGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 .content h2 {
