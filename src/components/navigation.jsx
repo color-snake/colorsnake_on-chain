@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styles from '@/styles/navigation.module.css';
 import networkStyles from '@/styles/network-toggle.module.css';
 import { NearContext } from '@/wallets/near';
@@ -39,12 +38,6 @@ export const Navigation = () => {
             </label>
           </div>
         </div>
-        <ul className={styles.navLinks}>
-          <li><Link to="/">Color Palettes</Link></li>
-          <li><Link to="/share">Share</Link></li>
-          <li><Link to="/submit">Submit</Link></li>
-          <li><Link to="/about">About</Link></li>
-        </ul>
         <button className={styles.loginButton} onClick={handleLogin}>
           {signedAccountId ? 'Logout' : 'Login'}
         </button>
