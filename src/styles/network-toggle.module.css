@@ -14,7 +14,7 @@
   display: inline-block;
   width: 120px;
   height: 32px;
-  background: var(--secondary-color);
+  background: var(--color-4);
   border-radius: 16px;
   position: relative;
   cursor: pointer;

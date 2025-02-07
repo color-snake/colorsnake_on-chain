@@ -1,7 +1,7 @@
 .header {
   width: 100%;
   padding: 1rem 1rem;
-  background-color: var(--primary-color);
+  background-color: var(--color-2);
   position: fixed;
   top: 0;
   left: 0;
@@ -94,11 +94,11 @@
 
 @media (prefers-color-scheme: dark) {
   .header {
-    background-color: var(--secondary-color);
+    background-color: var(--color-2);
     color: var(--text-color);
   }
   .menuButton:hover .menuLine {
     background-color: var(--light-accent);
-    background-color: var(--primary-color);
+    background-color: var(--color-2);
   }
 }
