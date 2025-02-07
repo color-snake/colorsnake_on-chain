@@ -15,11 +15,9 @@ export const Header = ({ onMenuToggle, isNavVisible }) => {
           onClick={handleMenuClick}
           aria-label="Toggle navigation menu"
         >
-          <div className={styles.snakeHead}>
-            <div className={styles.eye} />
-          </div>
-          <div className={styles.snakeBody} />
-          <div className={styles.snakeTail} />
+          <div className={styles.menuLine} />
+          <div className={styles.menuLine} />
+          <div className={styles.menuLine} />
         </button>
       </div>
     </header>

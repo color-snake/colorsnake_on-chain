@@ -85,34 +85,52 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 12px;
+  width: 40px;
+  height: 40px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  gap: 6px;
   position: relative;
-  transition: transform 0.3s ease;
 }
 
-.menuButton.open {
-  transform: rotate(90deg);
-}
-
-.snakeHead {
-  width: 12px;
-  height: 12px;
+.menuLine {
+  width: 24px;
+  height: 2px;
   background-color: var(--light-accent);
-  border-radius: 50%;
-  position: relative;
+  border-radius: 1px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
-.eye {
-  width: 4px;
-  height: 4px;
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  right: 2px;
+.menuButton.open .menuLine:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
 }
+
+.menuButton.open .menuLine:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.menuButton.open .menuLine:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.menuButton:hover .menuLine {
+  background-color: var(--accent-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  .snakeHead,
+  .snakeBody,
+  .snakeTail {
+    background-color: var(--text-color);
+  }
+}
+
 
 .snakeBody {
   width: 20px;
