@@ -1,8 +1,8 @@
 .navbar {
   width: 100%;
   height: 100vh;
-  background-color: var(--accent-color);
-  color: var(--text-color);
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -54,7 +54,7 @@
 }
 
 .loginButton {
-  background-color: var(--light-accent);
+  background-color: var(--color-2);
   border: 2px solid transparent;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -64,7 +64,7 @@
 }
 
 .loginButton span {
-  color: inherit;
+  color: var(--primary-text-color);
   mix-blend-mode: difference;
 }
 
@@ -73,12 +73,13 @@
 }
 
 .navLink {
-  color: var(--text-color);
+  color: var(--primary-text-color);
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: 600;
   transition: color 0.3s ease;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+  mix-blend-mode: difference;
 }
 
 .navLink:hover {
