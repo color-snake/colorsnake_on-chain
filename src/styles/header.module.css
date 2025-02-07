@@ -1,0 +1,78 @@
+.header {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--primary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  color: var(--light-accent);
+  font-size: 1.5rem;
+  margin: 0;
+  text-transform: uppercase;
+  font-family: 'junegull', sans-serif;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.menuButton.open {
+  transform: rotate(90deg);
+}
+
+.snakeHead {
+  width: 12px;
+  height: 12px;
+  background-color: var(--light-accent);
+  border-radius: 50%;
+  position: relative;
+}
+
+.eye {
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.snakeBody {
+  width: 20px;
+  height: 6px;
+  background-color: var(--light-accent);
+  margin: 0 2px;
+}
+
+.snakeTail {
+  width: 8px;
+  height: 8px;
+  background-color: var(--light-accent);
+  border-radius: 50%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    background-color: var(--secondary-color);
+  }
+}

@@ -1,5 +1,6 @@
 import { Navigation } from './components/navigation';
 import { Footer } from './components/footer';
+import { Header } from './components/header';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Share from './pages/Share';
@@ -37,10 +38,13 @@ function App() {
     window.location.reload();
   };
 
+  const [isNavVisible, setIsNavVisible] = useState(false);
+
   return (
     <NearContext.Provider value={{ wallet, signedAccountId, networkId, onNetworkChange: handleNetworkChange }}>
       <div className="container d-flex flex-column min-vh-100">
-        <Navigation />
+        <Header onMenuToggle={setIsNavVisible} />
+        {isNavVisible && <Navigation />}
         <main className="mt-4 flex-grow-1">
           <Routes>
             <Route path="/" element={<Home />} />
