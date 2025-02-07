@@ -5,8 +5,8 @@ using https://github.com/vgrichina/web4-min-contract
 
 first deploy web4-min-contract
 ```sh
-near deploy web4.colorsnake.testnet web4-min.wasm
-near deploy web4.colorsnake.near web4-min.wasm
+near deploy web4.colorsnake.testnet color_palette_contract/web4-min.wasm
+near deploy web4.colorsnake.near color_palette_contract/web4-min.wasm
 ```
 
 near cli network
