@@ -6,7 +6,7 @@ export const Home = () => {
       <h1 className={styles.title}>Color Palettes</h1>
       <div className={styles.paletteGrid}>
         {/* Palette components will be added here */}
-        <p>Color palettes coming soon...</p>
+        <p className={styles.comingSoon}>Color palettes coming soon...</p>
       </div>
     </div>
   );
