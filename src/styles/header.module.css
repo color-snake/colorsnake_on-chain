@@ -1,46 +1,11 @@
 .header {
   width: 100%;
   padding: 1rem 1rem;
-  background-color: var(--primary-color);
-  color: var(--text-color);
+  background-color: var(--accent-color);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: 'junegull', sans-serif;
-}
-
-.nav {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.navLink {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.navLink:hover {
-  color: var(--accent-color);
-}
-
-@media (prefers-color-scheme: dark) {
-  .header {
-    background-color: var(--secondary-color);
-  }
 }
 
 .headerContent {
@@ -64,21 +29,10 @@
   letter-spacing: 0.1em;
 }
 
-.logo {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: 'junegull', sans-serif;
-  mix-blend-mode: difference;
-}
-
-.navLink {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  mix-blend-mode: difference;
+.nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .menuButton {
@@ -99,7 +53,7 @@
 .menuLine {
   width: 24px;
   height: 2px;
-  background-color: var(--light-accent);
+  background-color: var(--text-color);
   border-radius: 1px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
@@ -120,34 +74,19 @@
 }
 
 .menuButton:hover .menuLine {
-  background-color: var(--accent-color);
+  background-color: var(--light-accent);
 }
 
 @media (prefers-color-scheme: dark) {
-  .snakeHead,
-  .snakeBody,
-  .snakeTail {
-    background-color: var(--text-color);
+  .menuButton:hover .menuLine {
+    background-color: var(--light-accent);
   }
-}
-
-
-.snakeBody {
-  width: 20px;
-  height: 6px;
-  background-color: var(--light-accent);
-  margin: 0 2px;
-}
-
-.snakeTail {
-  width: 8px;
-  height: 8px;
-  background-color: var(--light-accent);
-  border-radius: 50%;
+  background-color: var(--secondary-color);
 }
 
 @media (prefers-color-scheme: dark) {
   .header {
-    background-color: var(--random-bg-color);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
   }
 }
