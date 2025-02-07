@@ -39,9 +39,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 12px;
-  width: 40px;
-  height: 40px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +55,7 @@
   height: 2px;
   background-color: var(--text-color);
   border-radius: 1px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
 }
 
@@ -65,8 +65,7 @@
 
 .menuButton.open .menuLine:nth-child(2) {
   opacity: 0;
-  transform: scaleX(0);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: scale(0);
 }
 
 .menuButton.open .menuLine:nth-child(3) {
@@ -77,16 +76,27 @@
   background-color: var(--light-accent);
 }
 
-@media (prefers-color-scheme: dark) {
-  .menuButton:hover .menuLine {
-    background-color: var(--light-accent);
-  }
-  background-color: var(--secondary-color);
+.menuButton.open:hover .menuLine {
+  transform-origin: center;
+}
+
+.menuButton.open:hover .menuLine:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+  width: 24px;
+}
+
+.menuButton.open:hover .menuLine:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+  width: 24px;
 }
 
 @media (prefers-color-scheme: dark) {
   .header {
     background-color: var(--secondary-color);
     color: var(--text-color);
+  }
+  .menuButton:hover .menuLine {
+    background-color: var(--light-accent);
+    background-color: var(--primary-color);
   }
 }
