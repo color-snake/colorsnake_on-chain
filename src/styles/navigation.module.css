@@ -2,7 +2,7 @@
   width: 100%;
   height: 100vh;
   background-color: var(--primary-color);
-  color: var(--light-accent);
+  color: var(--text-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -55,7 +55,7 @@
 
 .loginButton {
   background-color: var(--accent-color);
-  color: var(--light-accent);
+  color: var(--text-color);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -65,11 +65,11 @@
 
 .loginButton:hover {
   background-color: var(--secondary-color);
-  color: var(--light-accent);
+  color: var(--text-color);
 }
 
 .navLink {
-  color: var(--light-accent);
+  color: var(--text-color);
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: 500;
@@ -83,12 +83,12 @@
 @media (prefers-color-scheme: dark) {
   .navbar {
     background-color: var(--secondary-color);
-    color: var(--light-accent);
+    color: var(--text-color);
   }
 
   .loginButton {
     background-color: var(--primary-color);
-    color: var(--light-accent);
+    color: var(--text-color);
   }
 
   .loginButton:hover {

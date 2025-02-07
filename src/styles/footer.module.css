@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   .footer {
-    background-color: var(--secondary-color);
+    background-color: var(--random-bg-color);
     color: var(--light-accent);
   }
 }
