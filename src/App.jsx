@@ -1,8 +1,12 @@
 import { Navigation } from './components/navigation';
 import { Footer } from './components/footer';
-import { MainContent } from './components/main-content';
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { NearContext, Wallet } from '@/wallets/near';
+import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { SharePage } from './pages/SharePage';
+import { SubmitPage } from './pages/SubmitPage';
 
 function App() {
   const [signedAccountId, setSignedAccountId] = useState(null);
@@ -38,7 +42,12 @@ function App() {
       <div className="container d-flex flex-column min-vh-100">
         <Navigation />
         <main className="mt-4 flex-grow-1">
-          <MainContent />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/share" element={<SharePage />} />
+            <Route path="/submit" element={<SubmitPage />} />
+          </Routes>
         </main>
         <Footer />
       </div>

@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from '@/styles/hamburger-menu.module.css';
 
 export const HamburgerMenu = ({ isOpen, toggleMenu }) => {
@@ -20,4 +20,9 @@ export const HamburgerMenu = ({ isOpen, toggleMenu }) => {
       </nav>
     </div>
   );
+};
+
+HamburgerMenu.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func.isRequired
 };
