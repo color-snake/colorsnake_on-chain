@@ -1,6 +1,14 @@
 # deploying to palette.colorsnake
 
 
+near cli network
+```sh
+export NEAR_NETWORK=testnet
+export NEAR_NETWORK=mainnet
+echo $NEAR_NETWORK 
+echo $NEAR_ENV
+```
+
 ```sh
 # Testnet
 near deploy --wasmFile color_palette.wasm  palette.colorsnake.testnet
