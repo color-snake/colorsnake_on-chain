@@ -1,6 +1,10 @@
 import { Navigation } from './components/navigation';
 import { Footer } from './components/footer';
-import { MainContent } from './components/main-content';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Share from './pages/Share';
+import Submit from './pages/Submit';
+import About from './pages/About';
 import { useEffect, useState } from 'react';
 import { NearContext, Wallet } from '@/wallets/near';
 
@@ -38,7 +42,12 @@ function App() {
       <div className="container d-flex flex-column min-vh-100">
         <Navigation />
         <main className="mt-4 flex-grow-1">
-          <MainContent />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/share" element={<Share />} />
+            <Route path="/submit" element={<Submit />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
         </main>
         <Footer />
       </div>
