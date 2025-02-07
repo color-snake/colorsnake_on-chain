@@ -20,7 +20,7 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${styles.visible}`}>
       <div className={styles.navContent}>
         <div className={styles.toggleContainer}>
           <div className={networkStyles.networkToggle}>
