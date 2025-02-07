@@ -3,7 +3,7 @@ the one stop shop for color built on near
 <br/>
 find a color platte for your next project.
 <br/>
-built on chain for devs, by devs.
+submit a color palette.
 
 
 
