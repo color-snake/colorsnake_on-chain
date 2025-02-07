@@ -43,8 +43,8 @@ function App() {
   return (
     <NearContext.Provider value={{ wallet, signedAccountId, networkId, onNetworkChange: handleNetworkChange }}>
       <div className="container d-flex flex-column min-vh-100">
-        <Header onMenuToggle={setIsNavVisible} />
-        {isNavVisible && <Navigation />}
+        <Header onMenuToggle={setIsNavVisible} isNavVisible={isNavVisible} />
+        <Navigation isNavVisible={isNavVisible} setIsNavVisible={setIsNavVisible} />
         <main className="mt-4 flex-grow-1">
           <Routes>
             <Route path="/" element={<Home />} />

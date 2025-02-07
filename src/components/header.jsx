@@ -1,13 +1,9 @@
-import { useState } from 'react';
-import styles from '@/styles/header.module.css';
 import PropTypes from 'prop-types';
+import styles from '@/styles/header.module.css';
 
-export const Header = ({ onMenuToggle }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+export const Header = ({ onMenuToggle, isNavVisible }) => {
   const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-    onMenuToggle(!isMenuOpen);
+    onMenuToggle(!isNavVisible);
   };
 
   return (
@@ -15,7 +11,7 @@ export const Header = ({ onMenuToggle }) => {
       <div className={styles.headerContent}>
         <h1 className={styles.title}>colorsnake</h1>
         <button
-          className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
+          className={`${styles.menuButton} ${isNavVisible ? styles.open : ''}`}
           onClick={handleMenuClick}
           aria-label="Toggle navigation menu"
         >
@@ -31,5 +27,6 @@ export const Header = ({ onMenuToggle }) => {
 };
 
 Header.propTypes = {
-  onMenuToggle: PropTypes.func.isRequired
+  onMenuToggle: PropTypes.func.isRequired,
+  isNavVisible: PropTypes.bool
 };
