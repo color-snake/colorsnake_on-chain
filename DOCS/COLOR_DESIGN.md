@@ -26,14 +26,31 @@ Dark
 #5F9D41
 ```
 
+```css
+:root {
+  --primary-color: #D2F5D6;
+  --primary-text-color: #FFFFFF; /* display mix blend mode different */
+  --color-1: #ED7936;
+  --color-2: #8E93EB;
+  --color-3: #ED4584;
+  --color-4: #F6C288;
+  --color-5: #6CEDEE;
+  --color-6: #FD74F1
+}
 
-
-dark + light
-```palette
-#300F31
-#D2F5D6
+@media (prefers-color-scheme: dark) {
+  :root {
+   --primary-color: #300F31;
+  --primary-text-color: #FFFFFF; /* display mix blend mode different */
+  --color-1: #214D88;
+  --color-2: #9A281E;
+  --color-3: #5EC795;
+  --color-4: #4899D1;
+  --color-5: #848046;
+  --color-6: #5F9D41
+  }
+}
 ```
-
 
 
 ---

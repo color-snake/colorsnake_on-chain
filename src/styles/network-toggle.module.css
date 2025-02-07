@@ -14,7 +14,7 @@
   display: inline-block;
   width: 120px;
   height: 32px;
-  background: var(--accent-color);
+  background: var(--secondary-color);
   border-radius: 16px;
   position: relative;
   cursor: pointer;
