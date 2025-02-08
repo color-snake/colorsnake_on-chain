@@ -1,7 +1,7 @@
 .paletteContainer {
   background: var(--color-5);
-  border-radius: 8px;
-  padding: 0.5rem;
+  border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
 }
@@ -11,15 +11,10 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.paletteName {
-  display: none;
-}
-
 .colorsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 0;
-  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -51,4 +46,47 @@
 
 .colorBlock:hover .colorHex {
   opacity: 1;
+}
+
+.paletteFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--color-5);
+}
+
+.paletteName {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--primary-text-color);
+}
+
+.likeContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.likeButton {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.likeButton:hover {
+  transform: scale(1.1);
+}
+
+.likeButton.liked {
+  color: #ff4d4d;
+}
+
+.likeCount {
+  font-size: 0.9rem;
+  color: var(--primary-text-color);
 }
