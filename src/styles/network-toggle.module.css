@@ -12,10 +12,10 @@
 
 .networkToggleLabel {
   display: inline-block;
-  width: 120px;
-  height: 32px;
+  width: 140px;
+  height: 36px;
   background: var(--color-4);
-  border-radius: 16px;
+  border-radius: 4px;
   position: relative;
   cursor: pointer;
   margin: 0;
@@ -28,20 +28,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 58px;
-  height: 28px;
+  width: 68px;
+  height: 32px;
   background: white;
   position: absolute;
   top: 2px;
   left: 2px;
-  border-radius: 14px;
+  border-radius: 3px;
   transition: all 0.3s ease;
   z-index: 2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .networkToggleInput:checked + .networkToggleLabel .networkToggleSwitch {
-  left: calc(100% - 60px);
+  left: calc(100% - 70px);
 }
 
 .networkToggleInner {
