@@ -52,7 +52,7 @@ function App() {
             <Route path="/share" element={<Share />} />
             <Route path="/submit" element={<Submit />} />
             <Route path="/about" element={<About />} />
-            <Route path="/palette/:id" element={<PaletteDetail />} />
+            <Route path="/palette/:id" element={<PaletteDetail networkId={networkId} />} />
           </Routes>
         </main>
         <Footer />
