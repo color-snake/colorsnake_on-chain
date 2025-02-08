@@ -1,0 +1,58 @@
+.paletteContainer {
+  background: var(--background-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.paletteContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.paletteName {
+  color: var(--primary-text-color);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  mix-blend-mode: difference;
+}
+
+.colorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 0.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.colorBlock {
+  aspect-ratio: 1;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.colorBlock:hover {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.colorHex {
+  opacity: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  transition: opacity 0.2s ease;
+}
+
+.colorBlock:hover .colorHex {
+  opacity: 1;
+}
