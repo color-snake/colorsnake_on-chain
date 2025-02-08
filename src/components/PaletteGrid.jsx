@@ -71,6 +71,7 @@ const PaletteGrid = () => {
           onLike={() => handleLike(palette.id, palette.network)}
           isLiked={likedPalettes[palette.id] || false}
           likeCount={palette.likes || 0}
+          wallet={wallet}
         />
       ))}
     </div>

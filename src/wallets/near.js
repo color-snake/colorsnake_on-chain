@@ -17,7 +17,7 @@ import { Buffer } from 'buffer';
 
 // near api js
 import { providers, utils } from 'near-api-js';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 // ethereum wallets
 import { wagmiConfig, web3Modal } from '@/wallets/web3modal';
@@ -274,3 +274,11 @@ export const NearContext = createContext({
   wallet: undefined,
   signedAccountId: '',
 });
+
+export const useWallet = () => {
+  const context = useContext(NearContext);
+  if (!context) {
+    throw new Error('useWallet must be used within a NearContext.Provider');
+  }
+  return context;
+};
