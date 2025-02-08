@@ -3,7 +3,6 @@ import { Footer } from './components/footer';
 import { Header } from './components/header';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Share from './pages/Share';
 import Submit from './pages/Submit';
 import About from './pages/About';
 import PaletteDetail from './pages/PaletteDetail';
@@ -49,7 +48,6 @@ function App() {
         <main className="mt-4 flex-grow-1">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/share" element={<Share />} />
             <Route path="/submit" element={<Submit />} />
             <Route path="/about" element={<About />} />
             <Route path="/palette/:id" element={<PaletteDetail networkId={networkId} />} />
