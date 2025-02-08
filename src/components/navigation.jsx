@@ -26,7 +26,6 @@ export const Navigation = ({ isNavVisible, setIsNavVisible }) => {
     <nav className={`${styles.navbar} ${isNavVisible ? styles.visible : ''}`}>
       <div className={styles.navContent}>
         <Link to="/" className={styles.navLink} onClick={() => setIsNavVisible(false)}>Home</Link>
-        <Link to="/share" className={styles.navLink} onClick={() => setIsNavVisible(false)}>Share</Link>
         <Link to="/submit" className={styles.navLink} onClick={() => setIsNavVisible(false)}>Submit</Link>
         <Link to="/about" className={styles.navLink} onClick={() => setIsNavVisible(false)}>About</Link>
         <div className={styles.toggleContainer}>
