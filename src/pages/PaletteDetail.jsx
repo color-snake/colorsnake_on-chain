@@ -14,7 +14,18 @@ const PaletteDetail = ({ networkId }) => {
       try {
         setLoading(true);
         const paletteData = await getPaletteById(id, networkId);
-        setPalette(paletteData);
+        if (!paletteData) {
+          console.error('Palette not found on', networkId);
+          // Try the other network if palette is not found
+          const otherNetwork = networkId === 'mainnet' ? 'testnet' : 'mainnet';
+          const altPaletteData = await getPaletteById(id, otherNetwork);
+          if (altPaletteData) {
+            console.log('Palette found on', otherNetwork);
+            setPalette(altPaletteData);
+          }
+        } else {
+          setPalette(paletteData);
+        }
       } catch (error) {
         console.error('Error fetching palette:', error);
       } finally {
