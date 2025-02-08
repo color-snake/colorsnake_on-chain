@@ -77,3 +77,30 @@ near call palette.colorsnake.testnet unlike_palette '{"palette_id":"palette-1"}'
 near view palette.colorsnake.testnet get_likes '{"palette_id":"palette-1"}'
 ```
 
+
+```palette
+#D2F5D6
+#ED7936
+#8E93EB
+#ED4584
+#F6C288
+#6CEDEE
+#FD74F1
+```
+
+```palette
+#300F31
+#214D88
+#9A281E
+#5EC795
+#4899D1
+#848046
+#5F9D41
+```
+
+
+```sh
+near call palette.colorsnake.near add_palette '{"name":"COLORSNAKE LIGHT","colors":["#D2F5D6", "#ED7936", "#8E93EB", "#ED4584", "#F6C288", "#6CEDEE", "#FD74F1"]}' --accountId colorsnake.near
+
+near call palette.colorsnake.near add_palette '{"name":"COLORSNAKE DARK","colors":["#300F31", "#214D88", "#9A281E", "#5EC795", "#4899D1", "#848046","#5F9D41"]}' --accountId colorsnake.near
+```
