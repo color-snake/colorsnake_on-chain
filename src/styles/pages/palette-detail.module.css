@@ -1,0 +1,125 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 5rem auto 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: var(--primary-text-color);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  mix-blend-mode: difference;
+}
+
+.loading, .error {
+  text-align: center;
+  color: var(--primary-text-color);
+  font-size: 1.2rem;
+  padding: 2rem;
+  mix-blend-mode: difference;
+}
+
+.paletteBox {
+  display: flex;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.colorBlock {
+  flex: 1;
+  position: relative;
+  transition: flex 0.3s ease;
+  cursor: pointer;
+}
+
+.colorBlock:hover {
+  flex: 1.5;
+}
+
+.colorHex {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.colorBlock:hover .colorHex {
+  opacity: 1;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.infoBox {
+  background: var(--color-5);
+  border: 1px solid var(--color-4);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.infoBox h3 {
+  color: var(--primary-text-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.infoBox p {
+  color: var(--primary-text-color);
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.colorInfo {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-4);
+}
+
+.colorInfo:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.colorInfo h4 {
+  color: var(--primary-text-color);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .paletteBox {
+    height: 200px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}
