@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getPaletteById } from '../utils/palette';
@@ -9,6 +9,7 @@ const PaletteDetail = ({ networkId }) => {
   const [palette, setPalette] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copiedColor, setCopiedColor] = useState(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const fetchPalette = async () => {
@@ -122,6 +123,59 @@ const PaletteDetail = ({ networkId }) => {
             );
           })}
         </div>
+      </div>
+
+      <div className={styles.canvasContainer}>
+        <h3>Share Color Palette</h3>
+        <div className={styles.canvasWrapper}>
+          <canvas
+            ref={canvasRef}
+            width="1600"
+            height="900"
+            className={styles.shareCanvas}
+          />
+        </div>
+        <button
+          className={styles.downloadButton}
+          onClick={() => {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw color blocks
+            const blockWidth = canvas.width / palette.colors.length;
+            palette.colors.forEach((color, index) => {
+              ctx.fillStyle = color;
+              ctx.fillRect(
+                index * blockWidth,
+                canvas.height * 0.3,
+                blockWidth,
+                canvas.height * 0.4
+              );
+            });
+
+            // Draw title
+            ctx.font = 'bold 80px Arial';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.fillText(palette.name, canvas.width / 2, 150);
+
+            // Draw colorsnake.near branding
+            ctx.font = '40px Arial';
+            ctx.fillText('colorsnake.near', canvas.width / 2, canvas.height - 100);
+
+            // Create download link
+            const link = document.createElement('a');
+            link.download = `${palette.name.toLowerCase().replace(/\s+/g, '-')}-palette.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+          }}
+        >
+          Download Palette Image
+        </button>
       </div>
     </div>
   );
