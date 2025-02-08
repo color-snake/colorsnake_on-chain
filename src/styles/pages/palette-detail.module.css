@@ -135,7 +135,46 @@
   max-width: 100%;
   height: auto;
   display: block;
-  background: #1a1a1a;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+}
+
+.shape:hover {
+  transform: scale(1.1);
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.rectangle {
+  border-radius: 4px;
+}
+
+.triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.paletteTitle {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'junegull', sans-serif;
+  font-size: 3rem;
+  color: #333;
+  text-align: center;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .downloadButton {

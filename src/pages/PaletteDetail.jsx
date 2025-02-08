@@ -142,30 +142,46 @@ const PaletteDetail = ({ networkId }) => {
             if (!canvas) return;
 
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#1a1a1a';
+            ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw color blocks
-            const blockWidth = canvas.width / palette.colors.length;
-            palette.colors.forEach((color, index) => {
+            // Create random shapes with palette colors
+            const shapes = ['circle', 'rectangle', 'triangle'];
+            const numShapes = 30; // Total number of shapes
+
+            for (let i = 0; i < numShapes; i++) {
+              const color = palette.colors[i % palette.colors.length];
+              const shape = shapes[Math.floor(Math.random() * shapes.length)];
+              const size = Math.random() * 200 + 50; // Random size between 50 and 250
+              const x = Math.random() * (canvas.width - size);
+              const y = Math.random() * (canvas.height - size);
+
               ctx.fillStyle = color;
-              ctx.fillRect(
-                index * blockWidth,
-                canvas.height * 0.3,
-                blockWidth,
-                canvas.height * 0.4
-              );
-            });
+              ctx.globalAlpha = 0.8;
+
+              if (shape === 'circle') {
+                ctx.beginPath();
+                ctx.arc(x + size/2, y + size/2, size/2, 0, Math.PI * 2);
+                ctx.fill();
+              } else if (shape === 'rectangle') {
+                ctx.fillRect(x, y, size, size);
+              } else if (shape === 'triangle') {
+                ctx.beginPath();
+                ctx.moveTo(x + size/2, y);
+                ctx.lineTo(x, y + size);
+                ctx.lineTo(x + size, y + size);
+                ctx.closePath();
+                ctx.fill();
+              }
+            }
+
+            ctx.globalAlpha = 1.0;
 
             // Draw title
-            ctx.font = 'bold 80px Arial';
-            ctx.fillStyle = '#ffffff';
+            ctx.font = '80px junegull';
+            ctx.fillStyle = '#333333';
             ctx.textAlign = 'center';
-            ctx.fillText(palette.name, canvas.width / 2, 150);
-
-            // Draw colorsnake.near branding
-            ctx.font = '40px Arial';
-            ctx.fillText('colorsnake.near', canvas.width / 2, canvas.height - 100);
+            ctx.fillText(palette.name, canvas.width / 2, canvas.height - 100);
 
             // Create download link
             const link = document.createElement('a');
