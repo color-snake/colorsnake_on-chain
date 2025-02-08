@@ -4,7 +4,7 @@ import PaletteGrid from '../components/PaletteGrid';
 export const Home = () => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Color Palettes</h1>
+      {/* <h1 className={styles.title}>Color Palettes on Chain</h1> */}
       <PaletteGrid />
     </div>
   );
