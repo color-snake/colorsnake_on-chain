@@ -27,6 +27,7 @@
   mix-blend-mode: difference;
   text-shadow: -0.5px -0.5px 0 #808080, 0.5px -0.5px 0 #808080, -0.5px 0.5px 0 #808080, 0.5px 0.5px 0 #808080;
   letter-spacing: 0.1em;
+  text-decoration: none;
 }
 
 .nav {
@@ -79,17 +80,7 @@
 }
 
 .menuButton.open:hover .menuLine {
-  transform-origin: center;
-}
-
-.menuButton.open:hover .menuLine:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-  width: 24px;
-}
-
-.menuButton.open:hover .menuLine:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-  width: 24px;
+  background-color: var(--color-1);
 }
 
 @media (prefers-color-scheme: dark) {
