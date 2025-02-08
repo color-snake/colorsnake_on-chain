@@ -3,10 +3,14 @@
 
 pages
 
-home - color palettes
+home - color palettes, on chain
 share - a page that puts the color palette on a canvas that they can download and share (1600x900px)
 submit - fun page for submiting color palettes
 about - how the app works
+playground - color slider playground
+prifile -  page for laoding paletes that user subited or liked
+
+not sure what pages will be in final version
 
 
 
