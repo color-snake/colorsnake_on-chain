@@ -1,26 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { getPaletteById } from '../utils/palette';
 import styles from '../styles/pages/palette-detail.module.css';
 
-const PaletteDetail = () => {
+const PaletteDetail = ({ networkId }) => {
   const { id } = useParams();
   const [palette, setPalette] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Fetch palette data using the ID
-    // This will be implemented once we have the contract method
     const fetchPalette = async () => {
       try {
         setLoading(true);
-        // Mock data for now
-        setPalette({
-          id,
-          name: 'Sample Palette',
-          colors: ['#FF5733', '#33FF57', '#3357FF', '#F133FF', '#33FFF5'],
-          creator: 'demo.near',
-          timestamp: new Date().toISOString()
-        });
+        const paletteData = await getPaletteById(id, networkId);
+        setPalette(paletteData);
       } catch (error) {
         console.error('Error fetching palette:', error);
       } finally {
@@ -29,7 +23,7 @@ const PaletteDetail = () => {
     };
 
     fetchPalette();
-  }, [id]);
+  }, [id, networkId]);
 
   if (loading) {
     return <div className={styles.loading}>Loading palette...</div>;
@@ -113,6 +107,10 @@ const PaletteDetail = () => {
       </div>
     </div>
   );
+};
+
+PaletteDetail.propTypes = {
+  networkId: PropTypes.string.isRequired
 };
 
 export default PaletteDetail;

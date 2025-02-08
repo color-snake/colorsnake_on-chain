@@ -13,11 +13,8 @@ const PaletteGrid = () => {
   useEffect(() => {
     const fetchPalettes = async () => {
       try {
-        const [mainnetPalettes, testnetPalettes] = await Promise.all([
-          getPalettes('mainnet'),
-          getPalettes('testnet')
-        ]);
-        setPalettes([...mainnetPalettes, ...testnetPalettes]);
+        const palettesData = await getPalettes(networkId);
+        setPalettes(palettesData);
       } catch (error) {
         console.error('Error fetching palettes:', error);
       } finally {
@@ -26,7 +23,7 @@ const PaletteGrid = () => {
     };
 
     fetchPalettes();
-  }, []);
+  }, [networkId]);
 
   const handleLike = async (paletteId, paletteNetwork) => {
     if (!wallet.isSignedIn()) {
