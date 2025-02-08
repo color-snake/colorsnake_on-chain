@@ -8,6 +8,7 @@ const PaletteDetail = ({ networkId }) => {
   const { id } = useParams();
   const [palette, setPalette] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [copiedColor, setCopiedColor] = useState(null);
 
   useEffect(() => {
     const fetchPalette = async () => {
@@ -24,6 +25,12 @@ const PaletteDetail = ({ networkId }) => {
 
     fetchPalette();
   }, [id, networkId]);
+
+  const handleCopyColor = (color) => {
+    navigator.clipboard.writeText(color);
+    setCopiedColor(color);
+    setTimeout(() => setCopiedColor(null), 1500);
+  };
 
   if (loading) {
     return <div className={styles.loading}>Loading palette...</div>;
@@ -78,7 +85,12 @@ const PaletteDetail = ({ networkId }) => {
             className={styles.colorBlock}
             style={{ backgroundColor: color }}
           >
-            <span className={styles.colorHex}>{color}</span>
+            <span 
+              className={`${styles.colorHex} ${copiedColor === color ? styles.copied : ''}`}
+              onClick={() => handleCopyColor(color)}
+            >
+              {copiedColor === color ? 'Copied!' : color}
+            </span>
           </div>
         ))}
       </div>
@@ -97,9 +109,15 @@ const PaletteDetail = ({ networkId }) => {
             return (
               <div key={index} className={styles.colorInfo}>
                 <h4>Color {index + 1}</h4>
-                <p>HEX: {colorInfo.hex}</p>
-                <p>RGB: {colorInfo.rgb}</p>
-                <p>HSL: {colorInfo.hsl}</p>
+                <p onClick={() => handleCopyColor(colorInfo.hex)} style={{ cursor: 'pointer' }}>
+                  HEX: {copiedColor === colorInfo.hex ? 'Copied!' : colorInfo.hex}
+                </p>
+                <p onClick={() => handleCopyColor(colorInfo.rgb)} style={{ cursor: 'pointer' }}>
+                  RGB: {copiedColor === colorInfo.rgb ? 'Copied!' : colorInfo.rgb}
+                </p>
+                <p onClick={() => handleCopyColor(colorInfo.hsl)} style={{ cursor: 'pointer' }}>
+                  HSL: {copiedColor === colorInfo.hsl ? 'Copied!' : colorInfo.hsl}
+                </p>
               </div>
             );
           })}
