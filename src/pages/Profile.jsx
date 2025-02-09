@@ -7,7 +7,6 @@ import ColorPalette from '../components/ColorPalette';
 const Profile = () => {
   const { signedAccountId, networkId, wallet } = useContext(NearContext);
   const [submittedPalettes, setSubmittedPalettes] = useState([]);
-  const [likedPalettes, setLikedPalettes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,20 +16,8 @@ const Profile = () => {
       try {
         setLoading(true);
         const allPalettes = await getPalettes(networkId);
-        
-        // Filter submitted palettes
         const submitted = allPalettes.filter(p => p.creator === signedAccountId);
         setSubmittedPalettes(submitted);
-
-        // Get liked palettes
-        const liked = await wallet.viewMethod({
-          contractId: networkId === 'mainnet' ? 'palette.colorsnake.near' : 'palette.colorsnake.testnet',
-          method: 'get_liked_palettes',
-          args: { account_id: signedAccountId }
-        });
-
-        const likedPaletteDetails = allPalettes.filter(p => liked.includes(p.id));
-        setLikedPalettes(likedPaletteDetails);
       } catch (error) {
         console.error('Error fetching palettes:', error);
       } finally {
@@ -39,7 +26,7 @@ const Profile = () => {
     };
 
     fetchPalettes();
-  }, [signedAccountId, networkId, wallet]);
+  }, [signedAccountId, networkId]);
 
   const handleLike = async (paletteId) => {
     if (!signedAccountId) return;
@@ -90,27 +77,7 @@ const Profile = () => {
                 key={palette.id}
                 palette={palette}
                 onLike={() => handleLike(palette.id)}
-                isLiked={likedPalettes.some(p => p.id === palette.id)}
-                likeCount={palette.likes || 0}
-                wallet={wallet}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className={styles.section}>
-        <h3 className={styles.sectionTitle}>Your Liked Palettes</h3>
-        {likedPalettes.length === 0 ? (
-          <p className={styles.emptyMessage}>You haven&apos;t liked any palettes yet</p>
-        ) : (
-          <div className={styles.palettesGrid}>
-            {likedPalettes.map(palette => (
-              <ColorPalette
-                key={palette.id}
-                palette={palette}
-                onLike={() => handleLike(palette.id)}
-                isLiked={true}
+                isLiked={false}
                 likeCount={palette.likes || 0}
                 wallet={wallet}
               />
