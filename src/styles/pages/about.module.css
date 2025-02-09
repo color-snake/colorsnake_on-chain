@@ -1,6 +1,6 @@
 .container {
   padding: 2rem;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 5rem auto 0;
   min-height: 100vh;
   display: flex;
@@ -8,8 +8,7 @@
 }
 
 .title {
-  color: var(--primary-text-color);
-  /* font-size: 2.5rem; */
+  color: white;
   font-family: 'junegull', sans-serif;
   margin-bottom: 2rem;
   text-align: center;
@@ -31,6 +30,7 @@
   color: white;
   mix-blend-mode: difference;
 }
+
 .content h4 {
   font-family: 'junegull', sans-serif;
 }
@@ -42,9 +42,9 @@
 }
 
 .contractList li {
-  padding: 0.5rem 0;
   color: var(--primary-text-color);
   font-family: monospace;
+  padding: 0.5rem 0;
   mix-blend-mode: difference;
 }
 
@@ -52,13 +52,12 @@
   background-color: var(--background-color);
   padding: 2rem;
   border-radius: 8px;
-  /* border: 3px solid var(--color-3); */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -67,11 +66,10 @@
   display: block;
   color: white;
   text-decoration: none;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: var(--color-2);
   border-radius: 8px;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .links a::after {
@@ -96,15 +94,5 @@
   
   .title {
     font-size: 2rem;
-  }
-  
-  .links {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .links a {
-    width: 100%;
-    text-align: center;
   }
 }
