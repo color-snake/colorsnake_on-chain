@@ -33,7 +33,7 @@ contract address
 social & links
 [colorsnake.near](https://colorsnake.near.social) - color palettes on chain
 [sleet.near](https://sleet.near.social) - unique names and design on near
-[nonresistant.near](https://nonresistant.near.social) - just trying to be real, i design stuff for fun.
+[nonresistant.near](https://nonresistant.near.social) - just trying to create something that is real
 
 
 

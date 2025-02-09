@@ -33,7 +33,7 @@ export const About = () => {
             href="https://nonresistant.near.social" 
             target="_blank" 
             rel="noopener noreferrer"
-            data-description="just trying to be real, I design stuff for fun"
+            data-description="just trying to create something that is real"
           >nonresistant.near</a>
         </div>
       </div>
