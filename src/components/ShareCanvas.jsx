@@ -16,9 +16,10 @@ const ShareCanvas = ({ palette }) => {
 
     // Calculate dimensions for rounded rectangles
     const totalColors = palette.colors.length;
-    const blockSpacing = 20; // Fixed spacing between blocks
+    const blockSpacing = 20; // Spacing between blocks
     const blockHeight = canvas.height * 0.6; // Height of each color block
-    const blockWidth = 120; // Fixed width for consistent look
+    const totalSpacing = blockSpacing * (totalColors - 1);
+    const blockWidth = (canvas.width - totalSpacing - 80) / totalColors; // Dynamic width calculation with margins
     const cornerRadius = 12; // Rounded corner radius
     let startX = (canvas.width - (blockWidth * totalColors + blockSpacing * (totalColors - 1))) / 2;
     const startY = (canvas.height - blockHeight) / 2;
@@ -51,10 +52,11 @@ const ShareCanvas = ({ palette }) => {
       
       ctx.restore();
 
-      // Add hex code text
+      // Add vertical hex code text
       ctx.save();
-      ctx.translate(startX + blockWidth/2, startY + blockHeight - 30); // Position text at bottom
-      const fontSize = 24; // Consistent font size
+      ctx.translate(startX + blockWidth/2, startY + blockHeight/2);
+      ctx.rotate(-Math.PI/2); // Rotate 90 degrees counterclockwise
+      const fontSize = 24;
       ctx.font = `${fontSize}px junegull`;
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
@@ -71,16 +73,17 @@ const ShareCanvas = ({ palette }) => {
       startX += blockWidth + blockSpacing;
     });
 
-    // Draw palette name
-    ctx.font = '48px junegull';
+    // Draw palette name in top left
+    ctx.font = '32px junegull';
     ctx.fillStyle = palette.colors[0];
-    ctx.textAlign = 'center';
-    ctx.fillText(palette.name, canvas.width/2, 50);
+    ctx.textAlign = 'left';
+    ctx.fillText(palette.name, 40, 50);
 
-    // Draw branding
+    // Draw branding in bottom right
     ctx.font = '24px junegull';
     ctx.fillStyle = palette.colors[palette.colors.length - 1];
-    ctx.fillText('COLORSNAKE.NEAR', canvas.width/2, canvas.height - 40);
+    ctx.textAlign = 'right';
+    ctx.fillText('COLORSNAKE.NEAR', canvas.width - 40, canvas.height - 40);
   };
 
   const handleGenerate = () => {
