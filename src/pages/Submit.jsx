@@ -34,7 +34,7 @@ export const Submit = () => {
 
     try {
       // Call the contract to add the palette
-      const contractId = `palette.colorsnake.${wallet.networkId}`;
+      const contractId = wallet.networkId === 'mainnet' ? 'palette.colorsnake.near' : 'palette.colorsnake.testnet';
       await wallet.callMethod({
         contractId,
         method: 'add_palette',
