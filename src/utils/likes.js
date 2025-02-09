@@ -1,69 +1,84 @@
-import { utils } from 'near-api-js';
+import { providers } from 'near-api-js';
+import { Buffer } from '../polyfills';
 
-const validateWalletConnection = async (wallet) => {
-  if (!wallet) {
-    throw new Error('Wallet is not connected');
-  }
-
-  const walletSelector = await wallet.selector;
-  const account = walletSelector.store.getState().accounts[0];
-
-  if (!account) {
-    throw new Error('No account found. Please connect your wallet.');
-  }
-
-  if (!account.contract) {
-    const contractId = `palette.colorsnake.${wallet.networkId}`;
-    throw new Error(`Contract not initialized for ${contractId}. Please ensure you are connected to the correct network.`);
-  }
-
-  return account.contract;
+const CONTRACT_ID = {
+  mainnet: 'palette.colorsnake.near',
+  testnet: 'palette.colorsnake.testnet'
 };
 
 const handleContractError = (error, action) => {
-  console.error(`Error ${action} palette:`, error);
+  console.error(`Error ${action}:`, error);
   if (error.message.includes('Contract not initialized')) {
-    throw error;
-  }
-  if (error.message.includes('Cannot read properties of undefined')) {
-    throw new Error('Contract connection failed. Please try reconnecting your wallet.');
+    throw new Error('Contract not initialized. Please ensure you are connected to the correct network.');
   }
   throw new Error(`Failed to ${action}: ${error.message}`);
 };
 
 export const likePalette = async (wallet, paletteId) => {
+  if (!wallet) {
+    throw new Error('Wallet is not connected');
+  }
+
   try {
-    const contract = await validateWalletConnection(wallet);
-    await contract.like_palette({
-      args: { palette_id: paletteId },
-      gas: '30000000000000'
+    const selectedWallet = await wallet.selector;
+    const outcome = await selectedWallet.signAndSendTransaction({
+      receiverId: CONTRACT_ID[wallet.networkId],
+      actions: [{
+        type: 'FunctionCall',
+        params: {
+          methodName: 'like_palette',
+          args: { palette_id: paletteId },
+          gas: '30000000000000',
+          deposit: '0'
+        }
+      }]
     });
-    return true;
+    return providers.getTransactionLastResult(outcome);
   } catch (error) {
-    handleContractError(error, 'like');
+    handleContractError(error, 'like palette');
   }
 };
 
 export const unlikePalette = async (wallet, paletteId) => {
+  if (!wallet) {
+    throw new Error('Wallet is not connected');
+  }
+
   try {
-    const contract = await validateWalletConnection(wallet);
-    await contract.unlike_palette({
-      args: { palette_id: paletteId },
-      gas: '30000000000000'
+    const selectedWallet = await wallet.selector;
+    const outcome = await selectedWallet.signAndSendTransaction({
+      receiverId: CONTRACT_ID[wallet.networkId],
+      actions: [{
+        type: 'FunctionCall',
+        params: {
+          methodName: 'unlike_palette',
+          args: { palette_id: paletteId },
+          gas: '30000000000000',
+          deposit: '0'
+        }
+      }]
     });
-    return true;
+    return providers.getTransactionLastResult(outcome);
   } catch (error) {
-    handleContractError(error, 'unlike');
+    handleContractError(error, 'unlike palette');
   }
 };
 
-export const getLikes = async (wallet, paletteId) => {
+export const getLikes = async (paletteId, networkId = 'testnet') => {
+  const url = `https://rpc.${networkId}.near.org`;
+  const provider = new providers.JsonRpcProvider({ url });
+
   try {
-    const contract = await validateWalletConnection(wallet);
-    return await contract.get_likes({
-      palette_id: paletteId
+    const res = await provider.query({
+      request_type: 'call_function',
+      account_id: CONTRACT_ID[networkId],
+      method_name: 'get_likes',
+      args_base64: Buffer.from(JSON.stringify({ palette_id: paletteId })).toString('base64'),
+      finality: 'optimistic',
     });
+    return JSON.parse(Buffer.from(res.result).toString());
   } catch (error) {
     handleContractError(error, 'get likes');
+    return 0;
   }
 };
