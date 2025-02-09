@@ -12,7 +12,7 @@ import { NearContext, Wallet } from '@/wallets/near';
 function App() {
   const [signedAccountId, setSignedAccountId] = useState(null);
   const [networkId, setNetworkId] = useState(() => {
-    return localStorage.getItem('networkId') || 'mainnet';
+    return localStorage.getItem('networkId') || 'testnet';
   });
   const [wallet, setWallet] = useState(() => new Wallet({ networkId, createAccessKeyFor: signedAccountId }));
 
