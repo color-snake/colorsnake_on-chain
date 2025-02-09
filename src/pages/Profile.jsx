@@ -78,7 +78,7 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Your Profile</h2>
+      <h2 className={styles.title}>Profile</h2>
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Your Submitted Palettes</h3>
         {submittedPalettes.length === 0 ? (
