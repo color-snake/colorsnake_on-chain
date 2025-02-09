@@ -47,8 +47,8 @@ body {
 }
 
 body {
-  color: var(--text-color);
-  background-color: var(--random-bg-color, var(--primary-color));
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 

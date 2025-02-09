@@ -86,10 +86,9 @@
 @media (prefers-color-scheme: dark) {
   .header {
     background-color: var(--color-2);
-    color: var(--text-color);
+    color: var(--primary-text-color);
   }
   .menuButton:hover .menuLine {
-    background-color: var(--light-accent);
     background-color: var(--color-2);
   }
 }
