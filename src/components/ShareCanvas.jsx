@@ -1,11 +1,12 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/components/share-canvas.module.css';
 
 const ShareCanvas = ({ palette }) => {
   const canvasRef = useRef(null);
+  const [, setCurrentSeed] = useState(Math.random());
 
-  const handleDownload = () => {
+  const generateCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -13,43 +14,83 @@ const ShareCanvas = ({ palette }) => {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Create random shapes with palette colors
-    const shapes = ['circle', 'rectangle', 'triangle'];
-    const numShapes = 30; // Total number of shapes
+    // Calculate dimensions for rounded rectangles
+    const totalColors = palette.colors.length;
+    const blockSpacing = 20; // Fixed spacing between blocks
+    const blockHeight = canvas.height * 0.6; // Height of each color block
+    const blockWidth = 120; // Fixed width for consistent look
+    const cornerRadius = 12; // Rounded corner radius
+    let startX = (canvas.width - (blockWidth * totalColors + blockSpacing * (totalColors - 1))) / 2;
+    const startY = (canvas.height - blockHeight) / 2;
 
-    for (let i = 0; i < numShapes; i++) {
-      const color = palette.colors[i % palette.colors.length];
-      const shape = shapes[Math.floor(Math.random() * shapes.length)];
-      const size = Math.random() * 200 + 50; // Random size between 50 and 250
-      const x = Math.random() * (canvas.width - size);
-      const y = Math.random() * (canvas.height - size);
-
+    // Draw each color as a rounded rectangle with hex code
+    palette.colors.forEach((color) => {
+      // Draw rounded rectangle
+      ctx.save();
+      
+      // Add subtle shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+      
+      // Draw rounded rectangle
       ctx.fillStyle = color;
-      ctx.globalAlpha = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(startX + cornerRadius, startY);
+      ctx.lineTo(startX + blockWidth - cornerRadius, startY);
+      ctx.arcTo(startX + blockWidth, startY, startX + blockWidth, startY + cornerRadius, cornerRadius);
+      ctx.lineTo(startX + blockWidth, startY + blockHeight - cornerRadius);
+      ctx.arcTo(startX + blockWidth, startY + blockHeight, startX + blockWidth - cornerRadius, startY + blockHeight, cornerRadius);
+      ctx.lineTo(startX + cornerRadius, startY + blockHeight);
+      ctx.arcTo(startX, startY + blockHeight, startX, startY + blockHeight - cornerRadius, cornerRadius);
+      ctx.lineTo(startX, startY + cornerRadius);
+      ctx.arcTo(startX, startY, startX + cornerRadius, startY, cornerRadius);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.restore();
 
-      if (shape === 'circle') {
-        ctx.beginPath();
-        ctx.arc(x + size/2, y + size/2, size/2, 0, Math.PI * 2);
-        ctx.fill();
-      } else if (shape === 'rectangle') {
-        ctx.fillRect(x, y, size, size);
-      } else if (shape === 'triangle') {
-        ctx.beginPath();
-        ctx.moveTo(x + size/2, y);
-        ctx.lineTo(x, y + size);
-        ctx.lineTo(x + size, y + size);
-        ctx.closePath();
-        ctx.fill();
-      }
-    }
+      // Add hex code text
+      ctx.save();
+      ctx.translate(startX + blockWidth/2, startY + blockHeight - 30); // Position text at bottom
+      const fontSize = 24; // Consistent font size
+      ctx.font = `${fontSize}px junegull`;
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      
+      // Subtle text shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+      ctx.shadowBlur = 3;
+      ctx.shadowOffsetX = 1;
+      ctx.shadowOffsetY = 1;
+      ctx.fillText(color.toUpperCase(), 0, 0);
+      ctx.restore();
 
-    ctx.globalAlpha = 1.0;
+      startX += blockWidth + blockSpacing;
+    });
 
-    // Draw title
-    ctx.font = '80px junegull';
-    ctx.fillStyle = '#333333';
+    // Draw palette name
+    ctx.font = '48px junegull';
+    ctx.fillStyle = palette.colors[0];
     ctx.textAlign = 'center';
-    ctx.fillText(palette.name, canvas.width / 2, canvas.height - 100);
+    ctx.fillText(palette.name, canvas.width/2, 50);
+
+    // Draw branding
+    ctx.font = '24px junegull';
+    ctx.fillStyle = palette.colors[palette.colors.length - 1];
+    ctx.fillText('COLORSNAKE.NEAR', canvas.width/2, canvas.height - 40);
+  };
+
+  const handleGenerate = () => {
+    setCurrentSeed(Math.random());
+    generateCanvas();
+  };
+
+  const handleDownload = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
     // Create download link
     const link = document.createElement('a');
@@ -57,6 +98,11 @@ const ShareCanvas = ({ palette }) => {
     link.href = canvas.toDataURL();
     link.click();
   };
+
+  // Generate initial canvas when component mounts
+  useState(() => {
+    generateCanvas();
+  }, []);
 
   return (
     <div className={styles.canvasContainer}>
@@ -69,12 +115,20 @@ const ShareCanvas = ({ palette }) => {
           className={styles.shareCanvas}
         />
       </div>
-      <button
-        className={styles.downloadButton}
-        onClick={handleDownload}
-      >
-        Download Palette Image
-      </button>
+      <div className={styles.buttonContainer}>
+        <button
+          className={styles.generateButton}
+          onClick={handleGenerate}
+        >
+          Generate New Design
+        </button>
+        <button
+          className={styles.downloadButton}
+          onClick={handleDownload}
+        >
+          Download Palette Image
+        </button>
+      </div>
     </div>
   );
 };

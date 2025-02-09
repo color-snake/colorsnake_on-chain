@@ -15,6 +15,7 @@
   overflow: hidden;
   border-radius: 12px;
   margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .shareCanvas {
@@ -26,6 +27,14 @@
   overflow: hidden;
 }
 
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.generateButton,
 .downloadButton {
   background: var(--color-5);
   color: var(--primary-text-color);
@@ -34,11 +43,26 @@
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: 'junegull', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+.generateButton {
+  background: var(--color-2);
+}
+
+.generateButton:hover,
 .downloadButton:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.generateButton:active,
+.downloadButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -46,6 +70,12 @@
     font-size: 1.2rem;
   }
 
+  .buttonContainer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .generateButton,
   .downloadButton {
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
