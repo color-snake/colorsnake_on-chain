@@ -99,7 +99,6 @@ export const Submit = () => {
             <button
               type="button"
               onClick={handleAddColor}
-              disabled={colors.length >= 5}
               className={styles.addButton}
             >
               Add Color
