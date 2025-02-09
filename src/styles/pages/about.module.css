@@ -9,7 +9,8 @@
 
 .title {
   color: var(--primary-text-color);
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
+  font-family: 'junegull', sans-serif;
   margin-bottom: 2rem;
   text-align: center;
   text-transform: uppercase;
@@ -20,7 +21,18 @@
   background-color: var(--background-color);
   padding: 2rem;
   border-radius: 8px;
+  border: 3px solid var(--color-3);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.content p,
+.content h4 {
+  color: white;
+  mix-blend-mode: difference;
+}
+.content h4 {
+  font-family: 'junegull', sans-serif;
 }
 
 .contractList {
@@ -36,24 +48,44 @@
   mix-blend-mode: difference;
 }
 
+.socialSection {
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: 8px;
+  /* border: 3px solid var(--color-3); */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .links {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
   margin-top: 1.5rem;
 }
 
 .links a {
-  color: var(--accent-color);
+  display: block;
+  color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
+  padding: 1.5rem;
+  background-color: var(--color-2);
+  border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+.links a::after {
+  content: attr(data-description);
+  display: block;
+  color: white;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+  mix-blend-mode: difference;
 }
 
 .links a:hover {
-  background-color: var(--accent-color);
+  background-color: var(--color-3);
   color: var(--light-accent);
 }
 

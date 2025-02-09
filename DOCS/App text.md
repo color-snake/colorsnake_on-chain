@@ -31,8 +31,9 @@ contract address
 - palette.colorsnake.near/.testnet, for storing color palettes
 
 social & links
-[colorsnake.near](https://colorsnake.near.social)
-[sleet.near](https://sleet.near.page/)
+[colorsnake.near](https://colorsnake.near.social) - color palettes on chain
+[sleet.near](https://sleet.near.social) - unique names and design on near
+[nonresistant.near](https://nonresistant.near.social) - just trying to be real, i design stuff for fun.
 
 
 
