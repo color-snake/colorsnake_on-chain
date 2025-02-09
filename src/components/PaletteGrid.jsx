@@ -32,7 +32,7 @@ const PaletteGrid = () => {
     }
 
     try {
-      const contractId = `palette.colorsnake.${wallet.networkId}`;
+      const contractId = networkId === 'mainnet' ? 'palette.colorsnake.near' : 'palette.colorsnake.testnet';
       if (likedPalettes[paletteId]) {
         await wallet.callMethod({
           contractId,
