@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Submit from './pages/Submit';
 import About from './pages/About';
 import PaletteDetail from './pages/PaletteDetail';
+import Profile from './pages/Profile';
 import { useEffect, useState } from 'react';
 import { NearContext, Wallet } from '@/wallets/near';
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="/submit" element={<Submit />} />
             <Route path="/about" element={<About />} />
             <Route path="/palette/:id" element={<PaletteDetail networkId={networkId} />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
         <Footer />

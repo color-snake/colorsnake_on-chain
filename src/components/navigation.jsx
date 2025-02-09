@@ -28,6 +28,9 @@ export const Navigation = ({ isNavVisible, setIsNavVisible }) => {
         <Link to="/" className={styles.navLink} onClick={() => setIsNavVisible(false)}>Home</Link>
         <Link to="/submit" className={styles.navLink} onClick={() => setIsNavVisible(false)}>Submit</Link>
         <Link to="/about" className={styles.navLink} onClick={() => setIsNavVisible(false)}>About</Link>
+        {signedAccountId && (
+          <Link to="/profile" className={styles.navLink} onClick={() => setIsNavVisible(false)}>Profile</Link>
+        )}
         <div className={styles.toggleContainer}>
           <div className={networkStyles.networkToggle}>
             <input
