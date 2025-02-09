@@ -25,33 +25,38 @@ const PaletteGrid = () => {
     fetchPalettes();
   }, [networkId]);
 
-  const handleLike = async (paletteId, paletteNetwork) => {
-    if (!wallet.isSignedIn()) {
-      await wallet.signIn();
-      return;
-    }
-
-    if (networkId !== paletteNetwork) {
-      alert(`Please switch to ${paletteNetwork} network to like this palette`);
+  const handleLikeToggle = async (paletteId) => {
+    if (!wallet) {
+      alert('Please connect your wallet first');
       return;
     }
 
     try {
-      const isLiked = likedPalettes[paletteId];
-      const { likePalette, unlikePalette } = await import('../utils/likes');
-      
-      if (isLiked) {
-        await unlikePalette(wallet, paletteId);
+      const contractId = `palette.colorsnake.${wallet.networkId}`;
+      if (likedPalettes[paletteId]) {
+        await wallet.callMethod({
+          contractId,
+          method: 'unlike_palette',
+          args: { palette_id: paletteId },
+          gas: '30000000000000',
+          deposit: '0'
+        });
+        const newLikedPalettes = { ...likedPalettes };
+        delete newLikedPalettes[paletteId];
+        setLikedPalettes(newLikedPalettes);
       } else {
-        await likePalette(wallet, paletteId);
+        await wallet.callMethod({
+          contractId,
+          method: 'like_palette',
+          args: { palette_id: paletteId },
+          gas: '30000000000000',
+          deposit: '0'
+        });
+        setLikedPalettes({ ...likedPalettes, [paletteId]: true });
       }
-
-      setLikedPalettes(prev => ({
-        ...prev,
-        [paletteId]: !isLiked
-      }));
     } catch (error) {
-      console.error('Error liking palette:', error);
+      console.error('Error toggling like:', error);
+      alert('Failed to update like status. Please try again.');
     }
   };
 
@@ -65,7 +70,7 @@ const PaletteGrid = () => {
         <ColorPalette
           key={index}
           palette={palette}
-          onLike={() => handleLike(palette.id, palette.network)}
+          onLike={() => handleLikeToggle(palette.id)}
           isLiked={likedPalettes[palette.id] || false}
           likeCount={palette.likes || 0}
           wallet={wallet}
