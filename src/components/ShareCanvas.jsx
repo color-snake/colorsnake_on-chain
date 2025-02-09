@@ -123,7 +123,7 @@ const ShareCanvas = ({ palette }) => {
           className={styles.generateButton}
           onClick={handleGenerate}
         >
-          Generate New Design
+          Load color palette
         </button>
         <button
           className={styles.downloadButton}
