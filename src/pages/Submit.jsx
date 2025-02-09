@@ -10,9 +10,7 @@ export const Submit = () => {
   const [currentColor, setCurrentColor] = useState('#000000');
 
   const handleAddColor = () => {
-    if (colors.length < 5) {
-      setColors([...colors, currentColor]);
-    }
+    setColors([...colors, currentColor]);
   };
 
   const handleRemoveColor = (index) => {
@@ -73,7 +71,7 @@ export const Submit = () => {
           </div>
           
           <div className={styles.formGroup}>
-            <label>Colors ({colors.length}/5)</label>
+            <label>Colors ({colors.length})</label>
             {colors.map((color, index) => (
               <div key={index} className={styles.colorItem}>
                 <div

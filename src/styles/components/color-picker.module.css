@@ -18,7 +18,8 @@
   border: 1px solid var(--border-color);
   border-radius: 4px;
   background: var(--input-background);
-  color: var(--text-color);
+  color: #FFFFFF;
+  mix-blend-mode: difference;
   font-family: monospace;
 }
 
@@ -43,14 +44,15 @@
 
 .sliderGroup label {
   min-width: 20px;
-  color: var(--text-color);
+  color: #FFFFFF;
+  mix-blend-mode: difference;
 }
 
 .sliderGroup input[type="range"] {
   flex: 1;
   height: 4px;
   -webkit-appearance: none;
-  background: var(--border-color);
+  background: var(--color-1);
   border-radius: 2px;
   outline: none;
 }
@@ -60,7 +62,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--accent-color);
+  background: var(--color-2);
   cursor: pointer;
   border: none;
 }
@@ -68,6 +70,7 @@
 .sliderGroup span {
   min-width: 40px;
   text-align: right;
-  color: var(--text-color);
+  color: #FFFFFF;
+  mix-blend-mode: difference;
   font-family: monospace;
 }
