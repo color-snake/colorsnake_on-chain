@@ -7,7 +7,7 @@ This guide outlines the SEO and metadata implementation for the Colorsnake color
 ```html
 <meta name="description" content="Create, discover, and share beautiful color palettes on the NEAR blockchain. Find the perfect color combination for your next project." />
 <meta name="keywords" content="color palette, blockchain, NEAR protocol, web3, design tools, color schemes, color combinations" />
-<meta name="author" content="SLEET" />
+<meta name="author" content="sleet.near" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
 
