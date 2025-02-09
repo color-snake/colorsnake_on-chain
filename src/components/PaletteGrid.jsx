@@ -38,13 +38,13 @@ const PaletteGrid = () => {
 
     try {
       const isLiked = likedPalettes[paletteId];
-      const method = isLiked ? 'unlike_palette' : 'like_palette';
+      const { likePalette, unlikePalette } = await import('../utils/likes');
       
-      await wallet.callMethod({
-        contractId: `palette.colorsnake.${networkId}`,
-        method,
-        args: { palette_id: paletteId }
-      });
+      if (isLiked) {
+        await unlikePalette(wallet, paletteId);
+      } else {
+        await likePalette(wallet, paletteId);
+      }
 
       setLikedPalettes(prev => ({
         ...prev,

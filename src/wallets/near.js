@@ -66,14 +66,50 @@ export class Wallet {
 
     const walletSelector = await this.selector;
     const isSignedIn = walletSelector.isSignedIn();
-    const accountId = isSignedIn ? walletSelector.store.getState().accounts[0].accountId : '';
+    const account = isSignedIn ? walletSelector.store.getState().accounts[0] : null;
+    
+    if (account) {
+      const contractId = `palette.colorsnake.${this.networkId}`;
+      const wallet = await walletSelector.wallet();
+      account.contract = {
+        like_palette: (args) => wallet.signAndSendTransaction({
+          receiverId: contractId,
+          actions: [{
+            type: 'FunctionCall',
+            params: {
+              methodName: 'like_palette',
+              args: args.args,
+              gas: args.gas,
+              deposit: '0'
+            }
+          }]
+        }),
+        unlike_palette: (args) => wallet.signAndSendTransaction({
+          receiverId: contractId,
+          actions: [{
+            type: 'FunctionCall',
+            params: {
+              methodName: 'unlike_palette',
+              args: args.args,
+              gas: args.gas,
+              deposit: '0'
+            }
+          }]
+        }),
+        get_likes: (args) => wallet.viewFunction({
+          contractId,
+          methodName: 'get_likes',
+          args
+        })
+      };
+    }
 
     walletSelector.store.observable.subscribe(async (state) => {
       const signedAccount = state?.accounts.find((account) => account.active)?.accountId;
       accountChangeHook(signedAccount || '');
     });
 
-    return accountId;
+    return account?.accountId || '';
   };
 
   /**
