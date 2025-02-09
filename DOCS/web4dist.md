@@ -20,8 +20,8 @@ echo $NEAR_ENV
 deploy
 
 ```sh
-npx web4-deploy dist web3.colorsnake.testnet --nearfs
-npx web4-deploy dist web3.colorsnake.near --nearfs
+npx web4-deploy dist web4.colorsnake.testnet --nearfs
+npx web4-deploy dist web4.colorsnake.near --nearfs
 ```
 - can be run with or without --nearfs
 
